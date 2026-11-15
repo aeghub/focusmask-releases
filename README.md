@@ -83,10 +83,51 @@ An optional small on/off pill that stays above every window: toggle the mask, co
 | --- | --- | --- |
 | Windows 10/11, installer | `FocusMask-<version>-windows-x64-setup.exe` | Installs per user; SmartScreen may warn the first time → *More info → Run anyway*. |
 | Windows 10/11, portable | `FocusMask-<version>-windows-x64-portable.zip` | Unzip anywhere and run `FocusMask.exe`. Your settings stay in that folder. |
-| macOS 11+, Apple silicon and Intel | `FocusMask-<version>-macos-universal.dmg` | Not notarized by Apple: after copying to Applications, right-click → *Open* the first time. |
+| macOS 11+, Apple silicon and Intel | `FocusMask-<version>-macos-universal.dmg` | Not notarized by Apple yet: macOS blocks the first launch. See [Installing on macOS](#installing-on-macos). |
 | Linux (experimental) | `.AppImage` or `.deb` | X11 only, no blur and no caret tracking. Untested. |
 
 Windows needs the Microsoft Edge WebView2 runtime, which is built into Windows 11.
+
+### Installing on macOS
+
+1. Download `FocusMask-<version>-macos-universal.dmg`, open it and drag **FocusMask** into **Applications**.
+2. Open FocusMask from Applications. The first time, macOS shows:
+   > **"FocusMask" Not Opened** — Apple could not verify "FocusMask" is free of malware that may harm your Mac or compromise your privacy.
+
+   This is expected and does not mean anything is wrong with the app: macOS shows it for any downloaded app that is not signed with a paid Apple Developer certificate. Click **Done** (not *Move to Trash*).
+3. Open **System Settings → Privacy & Security** and scroll to the bottom. Next to the message that "FocusMask" was blocked, click **Open Anyway**.
+4. Enter your Mac password, then click **Open** in the dialog that follows.
+
+You only do this **once**. After that FocusMask opens normally, and updates installed from inside the app do not show the warning again.
+
+- **Open Anyway** stays visible for about an hour after the last attempt. If it is not there, open the app again and repeat the steps.
+- On macOS 15 Sequoia and later, right-click → *Open* no longer skips the warning.
+- **Quicker, from Terminal** (instead of steps 2–4):
+  ```bash
+  xattr -dr com.apple.quarantine /Applications/FocusMask.app
+  ```
+- Following the text caret needs the **Accessibility** permission: macOS asks the first time; you can also turn on FocusMask in **System Settings → Privacy & Security → Accessibility**.
+
+<details>
+<summary><b>بالعربي: التثبيت على الماك</b></summary>
+
+<div dir="rtl">
+
+1. نزّل ملف `dmg`، وافتحه، واسحب **FocusMask** لـ **Applications**.
+2. افتح FocusMask. أول مرة هيظهر تحذير **"FocusMask" Not Opened**. ده طبيعي مع أي تطبيق مش موقّع بشهادة Apple Developer، ومش معناه إن فيه مشكلة. دوس **Done** (مش Move to Trash).
+3. افتح **System Settings ← Privacy & Security**، وانزل لآخر الصفحة، ودوس **Open Anyway** جنب سطر FocusMask.
+4. دخّل باسورد الماك، ودوس **Open**.
+
+ده بيتعمل مرة واحدة بس. زرار Open Anyway بيفضل ظاهر حوالي ساعة بعد آخر محاولة فتح. من macOS 15 وطالع، كليك يمين ← Open مبقاش بيشتغل.
+
+بديل سريع من Terminal:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/FocusMask.app
+```
+
+</div>
+</details>
 
 Installed copies check for new versions and update themselves from **Settings → General → Updates**. The portable copy tells you when a new version is out and opens this page.
 
